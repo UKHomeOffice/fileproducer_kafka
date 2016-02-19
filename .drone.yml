@@ -1,0 +1,29 @@
+build:
+  image: golang:1.5.1
+  environment:
+    - GO15VENDOREXPERIMENT=1
+  environment:
+    - GOPATH=/file_producer
+  commands:
+    - go get github.com/optiopay/kafka
+    - CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o file_producer
+
+publish:
+  docker:
+    registry: quay.io
+    environment:
+      - DOCKER_LAUNCH_DEBUG=true
+    username: $$QUAY_USER
+    password: $$QUAY_PASSWORD
+    email: $$QUAY_EMAIL
+    repo: quay.io/ukhomeofficedigital/docker-file-producer
+    storage_driver: vfs
+    tag:
+      - latest
+      - "$$BUILD_NUMBER"
+    when:
+      branch: master
+
+    branch: master
+
+
