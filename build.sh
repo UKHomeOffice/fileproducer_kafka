@@ -1,4 +1,3 @@
-#! /usr/bin
 
 go get github.com/optiopay/kafka
 
