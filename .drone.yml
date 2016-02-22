@@ -1,7 +1,5 @@
 build:
-  image: golang:1.5.1
-  environment:
-    - GO15VENDOREXPERIMENT=1
+  image: golang:1.6.0
   environment:
     - GOPATH=/file_producer
   commands:
